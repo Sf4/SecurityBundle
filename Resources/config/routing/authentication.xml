@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<routes xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns="http://symfony.com/schema/routing"
+        xsi:schemaLocation="http://symfony.com/schema/routing http://symfony.com/schema/routing/routing-1.0.xsd">
+
+    <route id="sf4_security_authentication" path="/" methods="GET POST">
+        <default key="_controller">sf4.security.authentication.controller:index</default>
+    </route>
+
+    <route id="sf4_security_authentication_login" path="/login" methods="GET POST">
+        <default key="_controller">sf4.security.authentication.controller:login</default>
+    </route>
+
+    <route id="sf4_security_authentication_register" path="/" methods="GET POST">
+        <default key="_controller">sf4.security.authentication.controller:register</default>
+    </route>
+
+</routes>

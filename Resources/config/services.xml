@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<container xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+           xmlns="http://symfony.com/schema/dic/services"
+           xsi:schemaLocation="http://symfony.com/schema/dic/services http://symfony.com/schema/dic/services/services-1.0.xsd">
+
+    <services>
+
+        <service id="sf4.security.authentication.controller"
+                 class="Sf4\SecurityBundle\Controller\AuthenticationController"
+                 public="true">
+            <call method="setContainer">
+                <argument type="service" id="service_container"/>
+            </call>
+        </service>
+
+        <service id="sf4.security.install.command"
+                 class="Sf4\SecurityBundle\Command\InstallCommand"
+                 parent="Sf4\SecurityBundle\Command\AbstractSecurityInstallUninstallCommand"
+                 public="true">
+            <tag name="console.command" command="sf4:security-install"/>
+        </service>
+
+        <service id="sf4.security.uninstall.command"
+                 class="Sf4\SecurityBundle\Command\UninstallCommand"
+                 parent="Sf4\SecurityBundle\Command\AbstractSecurityInstallUninstallCommand"
+                 public="true">
+            <tag name="console.command" command="sf4:security-uninstall"/>
+        </service>
+
+        <service id="Sf4\SecurityBundle\Command\AbstractSecurityInstallUninstallCommand"
+                 parent="Sf4\PublicBundle\Command\AbstractPublicInstallUninstallCommand"
+                 abstract="true">
+            <call method="setBundleName">
+                <argument key="$bundleName">Sf4SecurityBundle</argument>
+            </call>
+            <call method="setRouteName">
+                <argument key="$routeName">sf4_security</argument>
+            </call>
+        </service>
+
+        <service id="sf4.security.token.authenticator"
+                 class="Sf4\SecurityBundle\Security\TokenAuthenticator"
+                 public="true"
+        />
+
+        <service id="Sf4\SecurityBundle\Security\TokenAuthenticator"
+                 alias="sf4.security.token.authenticator"
+        />
+
+    </services>
+
+</container>
